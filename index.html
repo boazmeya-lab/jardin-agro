@@ -5,13 +5,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jardin Agro — Haute Fleuristerie</title>
   
-  <!-- Polices Google Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <link rel="stylesheet" href="/assets/css/style.css">
+  
+  <style>
+    /* Styles spécifiques pour la galerie et la navigation */
+    .service-card {
+      background: #fff;
+      border: 2px solid transparent;
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+    .service-card:hover, .service-card.active {
+      border-color: #2e5b38;
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(46,91,56,0.15);
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+    .filter-btn-all {
+      display: block;
+      margin: 0 auto 30px auto;
+      background: #2e5b38;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+  </style>
 </head>
 <body>
 
@@ -25,7 +60,8 @@
       <nav>
         <ul class="nav-menu">
           <li><a href="index.html" class="nav-link">Accueil</a></li>
-          <li><a href="boutique.html" class="nav-link">Boutique</a></li>
+          <li><a href="#services" class="nav-link">Services</a></li>
+          <li><a href="#galerie" class="nav-link">Galerie Catalogue</a></li>
           <li><a href="#livraison" class="nav-link">Livraison</a></li>
           <li><a href="contact.html" class="nav-link">Contact</a></li>
         </ul>
@@ -40,7 +76,7 @@
     </div>
   </header>
 
-  <!-- HERO SECTION VIDEO -->
+  <!-- HERO SECTION -->
   <section class="hero">
     <video class="hero-video" autoplay muted loop playsinline poster="/assets/images/hero.jpg">
       <source src="/assets/videos/video-accueil.mp4" type="video/mp4">
@@ -50,140 +86,244 @@
 
     <div class="hero-content">
       <h1 class="hero-title">Offrez plus que des fleurs, offrez une émotion.</h1>
-      <p class="hero-subtitle">Des bouquets uniques pour toutes les occasions.</p>
+      <p class="hero-subtitle">Choisissez votre événement et découvrez nos catalogues dédiés.</p>
       <div style="display:flex; gap:15px; justify-content:center;">
-        <a href="boutique.html" class="btn btn-primary">Commander maintenant</a>
-        <a href="#livraison" class="btn btn-outline">En savoir plus</a>
+        <a href="#services" class="btn btn-primary">Explorer par Service</a>
       </div>
     </div>
   </section>
 
-  <!-- SECTION PRODUITS (DÉFILEMENT LATÉRAL) -->
-  <section class="products-section">
+  <!-- SELECTION DES SERVICES (NAVIGATION PRINCIPALE) -->
+  <section class="services-section" id="services" style="padding: 60px 0; background: #fdfbf7;">
     <div class="container">
-      <div class="section-title">
-        <h2>Nos Créations Populaire</h2>
-        <p>Glissez latéralement pour explorer nos bouquets d'exception</p>
+      <div class="section-title" style="text-align: center; margin-bottom: 40px;">
+        <h2>Quel est votre besoin floral ?</h2>
+        <p>Cliquez sur un service pour ouvrir directement la galerie correspondante</p>
       </div>
 
-      <!-- Conteneur à défilement horizontal/latéral -->
-      <div class="horizontal-scroll-container">
+      <div class="services-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
         
-        <div class="product-card">
-          <div class="product-image-wrap">
-            <img src="/assets/images/rose-rouge.jpg" alt="Rose Rouge">
-          </div>
-          <div class="product-info">
-            <h3 class="product-name">Rose Rouge Passion</h3>
-            <div class="product-price">25 $</div>
-            <button class="btn btn-primary" onclick="cartManager.addItem({id: 1, name: 'Rose Rouge Passion', price: 25, size: 'Petit', qty: 1, image: '/assets/images/rose-rouge.jpg'})">
-              + Ajouter au panier
-            </button>
-          </div>
+        <div class="service-card" onclick="openGalleryCategory('hotel', this)">
+          <div style="font-size: 2.2rem; color:#2e5b38; margin-bottom:10px;"><i class="fa-solid fa-hotel"></i></div>
+          <h3>Fleurs pour Hôtel</h3>
         </div>
 
-        <div class="product-card">
-          <div class="product-image-wrap">
-            <img src="/assets/images/bouquet-elegance.jpg" alt="Bouquet Élégance">
-          </div>
-          <div class="product-info">
-            <h3 class="product-name">Bouquet Élégance</h3>
-            <div class="product-price">45 $</div>
-            <button class="btn btn-primary" onclick="cartManager.addItem({id: 2, name: 'Bouquet Élégance', price: 45, size: 'Petit', qty: 1, image: '/assets/images/bouquet-elegance.jpg'})">
-              + Ajouter au panier
-            </button>
-          </div>
+        <div class="service-card" onclick="openGalleryCategory('entreprise', this)">
+          <div style="font-size: 2.2rem; color:#2e5b38; margin-bottom:10px;"><i class="fa-solid fa-building-columns"></i></div>
+          <h3>Entreprises & Banques</h3>
         </div>
 
-        <div class="product-card">
-          <div class="product-image-wrap">
-            <img src="/assets/images/lys-blanc.jpg" alt="Lys Blanc">
-          </div>
-          <div class="product-info">
-            <h3 class="product-name">Lys Blanc Majestueux</h3>
-            <div class="product-price">35 $</div>
-            <button class="btn btn-primary" onclick="cartManager.addItem({id: 3, name: 'Lys Blanc Majestueux', price: 35, size: 'Petit', qty: 1, image: '/assets/images/lys-blanc.jpg'})">
-              + Ajouter au panier
-            </button>
-          </div>
+        <div class="service-card" onclick="openGalleryCategory('conference', this)">
+          <div style="font-size: 2.2rem; color:#2e5b38; margin-bottom:10px;"><i class="fa-solid fa-microphone-lines"></i></div>
+          <h3>Conférences & Cérémonies</h3>
+        </div>
+
+        <div class="service-card" onclick="openGalleryCategory('mariage', this)">
+          <div style="font-size: 2.2rem; color:#2e5b38; margin-bottom:10px;"><i class="fa-solid fa-champagne-glasses"></i></div>
+          <h3>Réception, Mariage & Fêtes</h3>
+        </div>
+
+        <div class="service-card" onclick="openGalleryCategory('funeraire', this)">
+          <div style="font-size: 2.2rem; color:#2e5b38; margin-bottom:10px;"><i class="fa-solid fa-dove"></i></div>
+          <h3>Cérémonies Funéraires</h3>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- SECTION LIVRAISON DE FLEURS -->
-  <section class="delivery-section" id="livraison">
+  <!-- GRANDE GALERIE CATALOGUE COMPLÈTE -->
+  <section class="products-section" id="galerie" style="padding: 60px 0;">
     <div class="container">
-      <div class="section-title">
-        <h2>Nous livrons vos émotions</h2>
-        <p>Jardin Agro assure la livraison rapide et sécurisée de vos bouquets à domicile, au bureau ou sur le lieu de votre choix.</p>
+      <div class="section-title" style="text-align:center;">
+        <h2 id="galleryTitle">Galerie de nos Réalisations</h2>
+        <p id="gallerySubtitle">Parcourez l'ensemble de notre catalogue floral</p>
       </div>
 
-      <div class="delivery-grid">
-        <div class="delivery-card">
-          <div class="delivery-icon"><i class="fa-solid fa-house"></i></div>
-          <h3>Livraison à domicile</h3>
-          <p>Directement au pas de votre porte dans les meilleures conditions.</p>
+      <button class="filter-btn-all" onclick="openGalleryCategory('all', null)">
+        <i class="fa-solid fa-border-all"></i> Afficher Tout le Catalogue
+      </button>
+
+      <!-- Grille d'affichage des Fleurs -->
+      <div class="gallery-grid" id="mainGallery">
+        
+        <!-- ITEM : HOTEL -->
+        <div class="product-card" data-category="hotel">
+          <div class="product-image-wrap">
+            <img src="/assets/images/hotel-lobby.jpg" alt="Composition Accueil Prestige">
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">Arrangement Hall & Réception</h3>
+            <div class="product-price">95 $</div>
+            <button class="btn btn-primary" onclick="openCustomizer('Arrangement Hall & Réception', 95)">
+              Personnaliser / Commander
+            </button>
+          </div>
         </div>
 
-        <div class="delivery-card">
-          <div class="delivery-icon"><i class="fa-solid fa-building"></i></div>
-          <h3>Livraison au bureau</h3>
-          <p>Faites surprise à vos proches ou collègues sur leur lieu de travail.</p>
+        <!-- ITEM : ENTREPRISE -->
+        <div class="product-card" data-category="entreprise">
+          <div class="product-image-wrap">
+            <img src="/assets/images/bouquet-elegance.jpg" alt="Bouquet Bureau VIP">
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">Bouquet Corporate Executive</h3>
+            <div class="product-price">70 $</div>
+            <button class="btn btn-primary" onclick="openCustomizer('Bouquet Corporate Executive', 70)">
+              Personnaliser / Commander
+            </button>
+          </div>
         </div>
 
-        <div class="delivery-card">
-          <div class="delivery-icon"><i class="fa-solid fa-gift"></i></div>
-          <h3>Livraison surprise</h3>
-          <p>Livraison anonyme ou accompagnée d'une carte personnalisée.</p>
+        <!-- ITEM : CONFÉRENCE -->
+        <div class="product-card" data-category="conference">
+          <div class="product-image-wrap">
+            <img src="/assets/images/lys-blanc.jpg" alt="Centre de Table Conférence">
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">Composition Pupitre & Podium</h3>
+            <div class="product-price">120 $</div>
+            <button class="btn btn-primary" onclick="openCustomizer('Composition Pupitre & Podium', 120)">
+              Personnaliser / Commander
+            </button>
+          </div>
         </div>
 
-        <div class="delivery-card">
-          <div class="delivery-icon"><i class="fa-solid fa-bolt"></i></div>
-          <h3>Livraison express</h3>
-          <p>Vos fleurs livrées en urgence en moins de 2h.</p>
+        <!-- ITEM : MARIAGE -->
+        <div class="product-card" data-category="mariage">
+          <div class="product-image-wrap">
+            <img src="/assets/images/rose-rouge.jpg" alt="Bouquet de Mariée">
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">Bouquet Mariée Passion</h3>
+            <div class="product-price">85 $</div>
+            <button class="btn btn-primary" onclick="openCustomizer('Bouquet Mariée Passion', 85)">
+              Personnaliser / Commander
+            </button>
+          </div>
         </div>
-      </div>
 
-      <div class="delivery-cta">
-        <a href="https://wa.me/243000000000?text=Bonjour%20Jardin%20Agro%20%F0%9F%8C%B9%0AJe%20souhaite%20obtenir%20des%20informations%20concernant%20une%20livraison." target="_blank" class="btn btn-primary">
-          <i class="fa-brands fa-whatsapp"></i> Commander une livraison
-        </a>
+        <!-- ITEM : FUNÉRAIRE -->
+        <div class="product-card" data-category="funeraire">
+          <div class="product-image-wrap">
+            <img src="/assets/images/lys-blanc.jpg" alt="Couronne Hommage">
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">Couronne Hommage Sérénité</h3>
+            <div class="product-price">110 $</div>
+            <button class="btn btn-primary" onclick="openCustomizer('Couronne Hommage Sérénité', 110)">
+              Personnaliser / Commander
+            </button>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- DRAWER PANIER -->
-  <div class="cart-drawer" id="cartDrawer">
-    <div class="cart-header">
-      <h3>Votre Panier</h3>
-      <div id="closeCart" style="cursor:pointer; font-size:1.2rem;"><i class="fa-solid fa-xmark"></i></div>
-    </div>
-    <div class="cart-body" id="cartItems">
-      <!-- Rempli par le JS cart.js -->
-    </div>
-    <div class="cart-footer">
-      <div style="display:flex; justify-content:space-between; margin-bottom:15px; font-weight:700;">
-        <span>Total :</span>
-        <span id="cartTotal">0 $</span>
-      </div>
-      <button class="btn btn-primary" id="whatsappOrderBtn" style="width:100%; background:#25D366; box-shadow:none;">
-        <i class="fa-brands fa-whatsapp"></i> Commander sur WhatsApp
-      </button>
+  <!-- MODAL DE PERSONNALISATION / SELECTION EN DIRECT -->
+  <div id="customizerModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:1000; align-items:center; justify-content:center;">
+    <div style="background:#fff; padding:30px; border-radius:12px; width:90%; max-width:500px; position:relative;">
+      <span onclick="closeCustomizer()" style="position:absolute; top:15px; right:20px; font-size:1.5rem; cursor:pointer;"><i class="fa-solid fa-xmark"></i></span>
+      <h3 id="customizerTitle">Personnaliser votre choix</h3>
+      <p id="customizerPrice" style="color:#2e5b38; font-weight:700; margin-bottom:15px;"></p>
+      
+      <form id="customizerForm" onsubmit="submitCustomization(event)">
+        <div style="margin-bottom:15px;">
+          <label style="display:block; margin-bottom:5px; font-weight:600;">Choix des fleurs / nuances :</label>
+          <select id="colorPalette" style="width:100%; padding:10px; border-radius:6px; border:1px solid #ddd;">
+            <option value="Roses Blanches & Lys">Roses Blanches & Lys</option>
+            <option value="Roses Rouges Passion">Roses Rouges Passion</option>
+            <option value="Mélange Événementiel Pastel">Mélange Événementiel Pastel</option>
+            <option value="Compositions exotiques">Compositions exotiques</option>
+          </select>
+        </div>
+
+        <div style="margin-bottom:15px;">
+          <label style="display:block; margin-bottom:5px; font-weight:600;">Message ou indication spéciale :</label>
+          <textarea id="customMessage" rows="3" placeholder="Nom de la société, date de la cérémonie..." style="width:100%; padding:10px; border-radius:6px; border:1px solid #ddd;"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width:100%; background:#25D366; border:none;">
+          <i class="fa-brands fa-whatsapp"></i> Envoyer la sélection sur WhatsApp
+        </button>
+      </form>
     </div>
   </div>
 
   <!-- FOOTER -->
   <footer>
-    <div class="container">
-      <div class="footer-bottom">
-        <p>&copy; 2026 Jardin Agro. Tous droits réservés.</p>
-      </div>
+    <div class="container" style="text-align:center; padding: 20px 0;">
+      <p>&copy; 2026 Jardin Agro. Tous droits réservés.</p>
     </div>
   </footer>
 
   <script src="/assets/js/main.js"></script>
   <script src="/assets/js/cart.js"></script>
+
+  <!-- LOGIQUE DE REDIRECTION GALERIE DIRECTE -->
+  <script>
+    let activeItem = { name: '', price: 0 };
+
+    const categoryTitles = {
+      'hotel': 'Galerie — Fleurs pour Hôtels',
+      'entreprise': 'Galerie — Entreprises & Banques',
+      'conference': 'Galerie — Conférences & Cérémonies',
+      'mariage': 'Galerie — Mariages & Réceptions',
+      'funeraire': 'Galerie — Cérémonies Funéraires',
+      'all': 'Catalogue Floral Général'
+    };
+
+    function openGalleryCategory(category, element) {
+      // 1. Mise à jour visuelle des cartes cliquées
+      document.querySelectorAll('.service-card').forEach(card => card.classList.remove('active'));
+      if (element) element.classList.add('active');
+
+      // 2. Filtrage des cartes de la galerie
+      const cards = document.querySelectorAll('#mainGallery .product-card');
+      cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      // 3. Changement du titre de la galerie
+      document.getElementById('galleryTitle').innerText = categoryTitles[category] || 'Galerie de nos Réalisations';
+
+      // 4. Défilement fluide vers la galerie
+      document.getElementById('galerie').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Modal
+    function openCustomizer(name, price) {
+      activeItem = { name, price };
+      document.getElementById('customizerTitle').innerText = name;
+      document.getElementById('customizerPrice').innerText = 'Prix estimé : ' + price + ' $';
+      document.getElementById('customizerModal').style.display = 'flex';
+    }
+
+    function closeCustomizer() {
+      document.getElementById('customizerModal').style.display = 'none';
+    }
+
+    function submitCustomization(event) {
+      event.preventDefault();
+      const options = document.getElementById('colorPalette').value;
+      const details = document.getElementById('customMessage').value;
+      const phone = "243000000000";
+
+      let text = `Bonjour Jardin Agro 🌹\n\n`;
+      text += `Je suis intéressé(e) par la catégorie ci-dessous :\n`;
+      text += `• Produit : ${activeItem.name}\n`;
+      text += `• Prix : ${activeItem.price} $\n`;
+      text += `• Préférence : ${options}\n`;
+      if (details) text += `• Détails : ${details}\n`;
+
+      window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, '_blank');
+      closeCustomizer();
+    }
+  </script>
 </body>
 </html>
